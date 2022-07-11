@@ -1,0 +1,20 @@
+config {
+  type: "view",
+  schema: "ms_exploration",
+  database: "ingka-sbpaa-ms-dev",
+  description: "table with cc and cd"
+}
+
+
+SELECT
+case when substring(cff_flow_level_2_code,0,4) in ('30.0','40.1','40.2','50.1','50.2','60.1','60.2','85.1','85.2') then 'CC'
+when substring(cff_flow_level_2_code,0,4) in ('70.1','70.2','80.1','80.2','86.1','86.2') then 'CD'
+else 'ELSE' end as channel,
+cff_flow_level_2_code
+FROM `ingka-sbpaa-ms-dev.ms_core_sources_prod.src_sales_base_v`
+where retail_unit_code = 'US' -- CHANGE HEREE
+and range_offer = 'HFO'
+and fy_trtl_no = 20213  -- CHANGE HEREEE
+and sales_channel in ('Remote','Online')
+group by cff_flow_level_2_code
+order by 1,2
