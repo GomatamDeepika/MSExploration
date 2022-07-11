@@ -1,0 +1,6 @@
+config {
+type: 'declaration',
+schema: "ms_core_sources_prod",
+database: "ingka-sbpaa-ms-dev",
+name: 'src_sales_base_v'
+}

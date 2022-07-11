@@ -1,0 +1,8 @@
+config {
+type: 'assertion',
+schema: "ms_exploration",
+database: "ingka-sbpaa-ms-dev"
+}
+
+select distinct channel from ${ref('cc_cd')}
+where channel NOT IN ('CC')
